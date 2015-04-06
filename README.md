@@ -2,7 +2,7 @@ IB Math HL Internal Assessment - Integer Factorization
 ===============
 Limitations
 ----------------
-The code can only factorize a 9-digit number. You also need to manually calculate the ceiling of square root n.
+The code can only factorize a 9-digit number.
 
 Abstract
 ----------------
