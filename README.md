@@ -12,6 +12,7 @@ The aim for my exploration is to attempt to hack RSA. Finding the private keys w
 
 Sample output
 ----------------
+````
 n = 938065379
 FF: 9613 is a factor
 FF: 97583 is another factor
@@ -21,3 +22,4 @@ BF: 9613 is a factor
 BF: 97583 is another factor
 BF: Total execution time: 0ms
 BF: steps involved: 4805
+````
