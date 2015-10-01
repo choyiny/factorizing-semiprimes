@@ -1,5 +1,7 @@
 IB Math HL IA - Hacking RSA (kinda)
 ===============
+Featured on [The Mathematics IA: Earning Full Marks on HL or SL Mathematics Explorations: Ideal for the INTERNATIONAL BACCALAUREATE DIPLOMA](http://www.amazon.com/gp/product/B00U4UE8EA/) as a method to increase personal engagement and a proof of authenticity.
+
 Usage
 ----------------
 Replace n with the semiprime you wish to factorize.
