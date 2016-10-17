@@ -5,7 +5,21 @@ public class Main {
     static int ffLooped = 0;
     static int bfLooped = 0;
     static int pfLooped = 0;
-
+    
+    public static int inputSemiPrime() {
+       int semiPrime = 0;
+       String errorMessage = "";
+       do{ 
+        try{
+             semiPrime = Integer.parseInt(JOptionPane.showInputDialog(errorMessage +"\nEnter a semiPrime"));
+             errorMessage = "";
+           }catch(NumberFormatException nfe){
+             errorMessage = "Invalid input. Please enter an integer";
+           }
+        }while(!errorMessage.isEmpty());
+        return semiPrime;
+    }
+    
     public static boolean sqrtnisEven(double sqrtn) {
         if (sqrtn % 2 == 0)
             return true;
@@ -98,6 +112,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        n = inputSemiPrime();
         fermatsFactorizationMethod(n);
         bruteForceMethod(n);
         pollardsRhoMethod(n);
