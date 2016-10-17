@@ -1,7 +1,10 @@
 package in.choy.math.ia;
+import java.util.Scanner;
 
 public class Main {
-    static int n = 397927; /* integer for factorization */
+    Scanner scan = new Scanner(System.in);
+    int s = scan.next();
+    static int n = s; /* integer for factorization */
     static int ffLooped = 0;
     static int bfLooped = 0;
     static int pfLooped = 0;
