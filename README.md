@@ -1,6 +1,10 @@
 IB Math HL IA - Hacking RSA (kinda)
 ===============
+[![Build Status](https://travis-ci.org/choyiny/factorizing-semiprimes.svg?branch=master)](https://travis-ci.org/choyiny/factorizing-semiprimes)
+
 Featured on [The Mathematics IA: Earning Full Marks on HL or SL Mathematics Explorations: Ideal for the INTERNATIONAL BACCALAUREATE DIPLOMA](http://www.amazon.com/gp/product/B00U4UE8EA/) as a method to increase personal engagement and a proof of authenticity.
+
+I've created this java program as part of my International Baccalaureate Mathematics Higher Level Internal Assessment. This is a proof of concept for factorizing public keys and crack the RSA cryptographic algorithm.
 
 Usage
 ----------------
@@ -12,8 +16,6 @@ This script uses 2 methods to factorize semiprimes.
 - Brute Force Method
 - Fermat's Factorization Method
 - Pollard's Rho Method
-
-For more details, visit the wiki. (Under construction)
 
 Limitations
 ----------------
