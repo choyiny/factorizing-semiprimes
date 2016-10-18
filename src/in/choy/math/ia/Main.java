@@ -27,7 +27,7 @@ public class Main {
         return gcd(b,a%b);
     }
 
-    public static void bruteForceMethod(BigInteger n) {
+    public static void bruteForceMethodBI(BigInteger n) {
       BigInteger TWO = new BigInteger("2");
       BigInteger i = new BigInteger("3");
 
@@ -129,6 +129,6 @@ public class Main {
         System.out.println("BigInteger start");
         int bfLooped = 0;
         BigInteger bn = new BigInteger(Integer.toString(n));
-        bruteForceMethod(bn);
+        bruteForceMethodBI(bn);
     }
 }
