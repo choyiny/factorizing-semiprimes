@@ -1,5 +1,7 @@
 package in.choy.math.ia;
 
+import javax.swing.*;
+
 public class Main {
     static int n = 397927; /* integer for factorization */
     static int ffLooped = 0;

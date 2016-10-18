@@ -93,6 +93,14 @@ dist/
 nbdist/
 .nb-gradle/
 
+#Covers for IntelliJ
+.idea/*
+.idea/workspace.xml
+*.iml
+
+#Maven built files
+target/*
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Gradle template
 
