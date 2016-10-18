@@ -1,5 +1,6 @@
 package in.choy.math.ia;
 
+import java.math.BigInteger;
 import javax.swing.*;
 
 public class Main {
@@ -7,11 +8,11 @@ public class Main {
     static int ffLooped = 0;
     static int bfLooped = 0;
     static int pfLooped = 0;
-    
+
     public static int inputSemiPrime() {
        int semiPrime = 0;
        String errorMessage = "";
-       do{ 
+       do{
         try{
              semiPrime = Integer.parseInt(JOptionPane.showInputDialog(errorMessage +"\nEnter a semiPrime"));
              errorMessage = "";
@@ -21,7 +22,7 @@ public class Main {
         }while(!errorMessage.isEmpty());
         return semiPrime;
     }
-    
+
     public static boolean sqrtnisEven(double sqrtn) {
         if (sqrtn % 2 == 0)
             return true;
@@ -39,6 +40,28 @@ public class Main {
             return a;
         }
         return gcd(b,a%b);
+    }
+
+    public static void bruteForceMethodBI(BigInteger n) {
+      BigInteger TWO = new BigInteger("2");
+      BigInteger i = new BigInteger("3");
+
+      final long bfStartTime = System.currentTimeMillis();
+      while (true) {
+        BigInteger tmp0 = n.mod(i);
+        if (tmp0==BigInteger.ZERO) {
+          break;
+        }
+        i = i.add(TWO);
+        bfLooped++;
+      }
+      final long bfEndTime = System.currentTimeMillis();
+
+      System.out.println("BF: " + i + " is a factor");
+      System.out.println("BF: " + n.divide( i ) + " is another factor");
+      System.out.println("BF: Total execution time: " + (bfEndTime - bfStartTime) + "ms");
+      System.out.println("BF: steps involved: " + bfLooped);
+
     }
 
     public static void bruteForceMethod(int n) {
@@ -118,5 +141,10 @@ public class Main {
         fermatsFactorizationMethod(n);
         bruteForceMethod(n);
         pollardsRhoMethod(n);
+
+        System.out.println("BigInteger start");
+        int bfLooped = 0;
+        BigInteger bn = new BigInteger(Integer.toString(n));
+        bruteForceMethodBI(bn);
     }
 }
