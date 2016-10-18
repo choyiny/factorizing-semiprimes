@@ -19,7 +19,7 @@
 
 #### **Do you intend to add a new feature or change an existing one?**
 
-* Suggest your change in the [Issues](https://github.com/choyiny/factorizing-semiprimes/issues) and start writing code.
+* Suggest your change in the [issues](https://github.com/choyiny/factorizing-semiprimes/issues) and start writing code.
 
 </br>
 
