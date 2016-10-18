@@ -1,12 +1,27 @@
 package in.choy.math.ia;
 
 import java.math.BigInteger;
+import javax.swing.*;
 
 public class Main {
     static int n = 397927; /* integer for factorization */
     static int ffLooped = 0;
     static int bfLooped = 0;
     static int pfLooped = 0;
+
+    public static int inputSemiPrime() {
+       int semiPrime = 0;
+       String errorMessage = "";
+       do{
+        try{
+             semiPrime = Integer.parseInt(JOptionPane.showInputDialog(errorMessage +"\nEnter a semiPrime"));
+             errorMessage = "";
+           }catch(NumberFormatException nfe){
+             errorMessage = "Invalid input. Please enter an integer";
+           }
+        }while(!errorMessage.isEmpty());
+        return semiPrime;
+    }
 
     public static boolean sqrtnisEven(double sqrtn) {
         if (sqrtn % 2 == 0)
@@ -122,6 +137,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        n = inputSemiPrime();
         fermatsFactorizationMethod(n);
         bruteForceMethod(n);
         pollardsRhoMethod(n);
