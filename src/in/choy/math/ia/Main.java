@@ -1,5 +1,7 @@
 package in.choy.math.ia;
 
+import java.math.BigInteger;
+
 public class Main {
     static int n = 397927; /* integer for factorization */
     static int ffLooped = 0;
@@ -23,6 +25,28 @@ public class Main {
             return a;
         }
         return gcd(b,a%b);
+    }
+
+    public static void bruteForceMethod(BigInteger n) {
+      BigInteger TWO = new BigInteger("2");
+      BigInteger i = new BigInteger("3");
+
+      final long bfStartTime = System.currentTimeMillis();
+      while (true) {
+        BigInteger tmp0 = n.mod(i);
+        if (tmp0==BigInteger.ZERO) {
+          break;
+        }
+        i = i.add(TWO);
+        bfLooped++;
+      }
+      final long bfEndTime = System.currentTimeMillis();
+
+      System.out.println("BF: " + i + " is a factor");
+      System.out.println("BF: " + n.divide( i ) + " is another factor");
+      System.out.println("BF: Total execution time: " + (bfEndTime - bfStartTime) + "ms");
+      System.out.println("BF: steps involved: " + bfLooped);
+
     }
 
     public static void bruteForceMethod(int n) {
@@ -101,5 +125,10 @@ public class Main {
         fermatsFactorizationMethod(n);
         bruteForceMethod(n);
         pollardsRhoMethod(n);
+
+        System.out.println("BigInteger start");
+        int bfLooped = 0;
+        BigInteger bn = new BigInteger(Integer.toString(n));
+        bruteForceMethod(bn);
     }
 }
