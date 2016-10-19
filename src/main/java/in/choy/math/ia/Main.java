@@ -122,18 +122,28 @@ public class Main {
 
     public static void pollardsRhoMethodBI(BigInteger n) {
   		final long pfStartTime = System.currentTimeMillis();
+
+      // initialize variables like the int version
   		BigInteger p = BigInteger.ZERO;
   		BigInteger x = BigInteger.ONE;
+
   		while (true) {
+
+        // compare p to 1
   			int res = p.compareTo(BigInteger.ONE);
   			if (res>0) {
   				break;
   			}
 
+        // this is the same as x++
   			x = x.add(BigInteger.ONE);
 
+        // here the formula is
+        // x^4 + x^2 + 1
+        // then mod that by n ( % n )
+        // then gcd(n)
   			p = x.pow(4).add(x.pow(2)).add(BigInteger.ONE).mod(n).gcd(n);
-              pfLooped++;
+        pfLooped++;
   		}
   		final long pfEndTime = System.currentTimeMillis();
       System.out.println("PF: " + p + " is a factor");
