@@ -121,6 +121,39 @@ public class Main {
         System.out.println("FF: steps involved: " + ffLooped);
     }
 
+    public static void pollardsRhoMethodBI(BigInteger n) {
+  		final long pfStartTime = System.currentTimeMillis();
+
+      // initialize variables like the int version
+  		BigInteger p = BigInteger.ZERO;
+  		BigInteger x = BigInteger.ONE;
+
+  		while (true) {
+
+        // compare p to 1
+  			int res = p.compareTo(BigInteger.ONE);
+  			if (res>0) {
+  				break;
+  			}
+
+        // this is the same as x++
+  			x = x.add(BigInteger.ONE);
+
+        // here the formula is
+        // x^4 + x^2 + 1
+        // then mod that by n ( % n )
+        // then gcd(n)
+  			p = x.pow(4).add(x.pow(2)).add(BigInteger.ONE).mod(n).gcd(n);
+        pfLooped++;
+  		}
+  		final long pfEndTime = System.currentTimeMillis();
+      System.out.println("PF: " + p + " is a factor");
+      System.out.println("PF: " + n.divide(p) + " is another factor");
+      System.out.println("PF: steps involved: " + pfLooped);
+      System.out.println("PF: Total execution time: " + (pfEndTime - pfStartTime) + "ms");
+  	}
+
+
     public static void pollardsRhoMethod(int num) {
         final long pfStartTime = System.currentTimeMillis();
         int p = 0; //result of gcd
@@ -147,5 +180,6 @@ public class Main {
         int bfLooped = 0;
         BigInteger bn = new BigInteger(Integer.toString(n));
         bruteForceMethodBI(bn);
+        pollardsRhoMethodBI(bn);
     }
 }
