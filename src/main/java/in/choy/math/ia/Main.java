@@ -1,13 +1,19 @@
 package in.choy.math.ia;
 
 import java.math.BigInteger;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import javax.swing.*;
 
 public class Main {
+    
     static int n = 397927; /* integer for factorization */
+    static BigInteger nBI = BigInteger.valueOf(n);
     static int ffLooped = 0;
     static int bfLooped = 0;
     static int pfLooped = 0;
+    static BigInteger two=new BigInteger("2");
+    static BigInteger four=new BigInteger("4");
 
     public static int inputSemiPrime() {
        int semiPrime = 0;
@@ -30,6 +36,13 @@ public class Main {
         return false;
     }
 
+    public static boolean sqrtnisEvenBI(BigInteger sqrtn) {
+        if (sqrtn.divide(two).compareTo(BigInteger.ZERO) == 0) {		//sqrtn %2 == 0
+            return true;
+        }
+        return false;
+    }
+    
     public static boolean aIsGonnaBeEven() {
         if ((n + 1) % 4 == 0) {
             return true;
@@ -37,6 +50,20 @@ public class Main {
         return false;
     }
 
+	public static boolean aIsGonnaBeEvenBI() {
+        if ((nBI.add(BigInteger.ONE)).mod(four).compareTo(BigInteger.ZERO)==0) {	//(n+1)%4==0
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean chkInt(BigInteger bsquared) {
+        if ((sqr(new BigDecimal(bsquared)).remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO))==0) {
+            return true;
+        }
+        return false;
+    }
+    
     public static int gcd(int a, int b) {
         if (b == 0) {
             return a;
@@ -79,6 +106,64 @@ public class Main {
         System.out.println("BF: steps involved: " + bfLooped);
     }
 
+	public static BigDecimal sqr(BigDecimal v) {					//Babylonian Method to find square root with BigDecimal
+		BigDecimal two=new BigDecimal("2.0");
+		BigDecimal initial=BigDecimal.ZERO;	
+		BigDecimal x=v.divide(two,RoundingMode.FLOOR);				//initial estimate of square root value
+		while(!initial.equals(x)) {
+			initial=x;
+			x=v.divide(initial,100,RoundingMode.HALF_UP);
+			x=x.add(initial);
+			x=x.divide(two,100,RoundingMode.HALF_UP);
+		}	
+		return x;
+	}
+
+	public static void fermatsFactorizationMethodBI(BigInteger num) {
+		final long ffStartTime = System.currentTimeMillis();
+	    
+		BigInteger a = sqr(new BigDecimal(num)).toBigInteger();		//Square root of num 
+		BigInteger bsquared = a.multiply(a).subtract(num);			// a*a-num
+		if(aIsGonnaBeEvenBI()) {									// chk if a is even  
+			if(sqrtnisEvenBI(a)) {									// sqrt of n is even
+				while (chkInt(bsquared)) {							// chk if bsquared is a perfect Integer
+					a=a.add(two);
+					bsquared= a.multiply(a).subtract(num);
+					ffLooped++;
+				}
+			} else {
+				a=a.add(BigInteger.ONE);							//a++
+				while (chkInt(bsquared)) {											
+					a=a.add(two);
+					bsquared= a.multiply(a).subtract(nBI);
+					ffLooped++;
+				}
+			}
+		} else {																	
+			if(sqrtnisEvenBI(a)) {									// chk if bsquared is a perfect Integer
+				a=a.add(BigInteger.ONE);							//a++
+				while (chkInt(bsquared)) {
+					a=a.add(two);
+					bsquared= a.multiply(a).subtract(num);
+					ffLooped++;
+				}
+			} else {
+				while (chkInt(bsquared)) {
+					a=a.add(two);
+					bsquared= a.multiply(a).subtract(nBI);
+					ffLooped++;
+				}
+			}
+		}
+		final long ffEndTime = System.currentTimeMillis();
+        System.out.println("FF: " + (a.subtract(sqr(new BigDecimal(bsquared)).toBigInteger())) + " is a factor");
+									//a-Math.sqrt(bsquared)
+        System.out.println("FF: " + (a.add(sqr(new BigDecimal(bsquared)).toBigInteger())) + " is another factor");
+									//a+Math.sqrt(bsquared)
+        System.out.println("FF: Total execution time: " + (ffEndTime - ffStartTime) + "ms");
+        System.out.println("FF: steps involved: " + ffLooped);
+}
+	
     public static void fermatsFactorizationMethod(int num) {
         final long ffStartTime = System.currentTimeMillis();
         int a = (int) Math.ceil(Math.sqrt(num));
@@ -181,5 +266,6 @@ public class Main {
         BigInteger bn = new BigInteger(Integer.toString(n));
         bruteForceMethodBI(bn);
         pollardsRhoMethodBI(bn);
+        fermatsFactorizationMethodBI(bn);
     }
 }
