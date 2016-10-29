@@ -266,11 +266,11 @@ public class Main {
 		 * 	i.e. the maximum allocatable size to an array/list   */
 		
 		final long bfStartTime = System.currentTimeMillis();
-		int []sp=new int[num];
-		bfLooped=Sieve(num,sp);
-		if(num!=sp[num])
+		int []smallestPrime=new int[num];
+		bfLooped=Sieve(num,smallestPrime);
+		if(num!=smallestPrime[num])
 		{
-			int i=sp[num];
+			int i=smallestPrime[num];
 			System.out.println("SF: " + i + " is a factor");
 			System.out.println("SF: " + num / i + " is another factor");
 		}
@@ -284,19 +284,19 @@ public class Main {
 	}
 	
 	
-	public static int Sieve(int max,int sp[]) {
+	public static int Sieve(int max,int smallestPrime[]) {
 		int steps=0;
-		boolean v[]=new boolean[max];
-		for (int e = 2; e < max; e += 2)	sp[e] = 2;	//even numbers have smallest prime factor 2
+		boolean visited[]=new boolean[max];
+		for (int even = 2; even < max; even += 2)	smallestPrime[even] = 2;	//even numbers have smallest prime factor 2
 		
 		for (int i = 3; i < max; i += 2) {
 		
-			if (!v[i]) {
-				sp[i] = i;
+			if (!visited[i]) {
+				smallesPrime[i] = i;
 				for (int j = i; (j*i) < max; j += 2) {
-					if (!v[j*i]) {
-						v[j*i] = true;
-						sp[j*i] = i;					//update smallest prime factor of number j*i as i
+					if (!visited[j*i]) {
+						visited[j*i] = true;
+						smallestPrime[j*i] = i;		//update smallest prime factor of number j*i as i
 					}
 				}
 				steps++;
