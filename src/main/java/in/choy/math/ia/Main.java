@@ -12,6 +12,7 @@ public class Main {
     static int ffLooped = 0;
     static int bfLooped = 0;
     static int pfLooped = 0;
+    static int esLooped = 0;
     static BigInteger two=new BigInteger("2");
     static BigInteger four=new BigInteger("4");
 
@@ -265,22 +266,22 @@ public class Main {
 		 * 	integer can only be the size of 10^7
 		 * 	i.e. the maximum allocatable size to an array/list   */
 		
-		final long bfStartTime = System.currentTimeMillis();
+		final long esStartTime = System.currentTimeMillis();
 		int []smallestPrime=new int[num];
-		bfLooped=Sieve(num,smallestPrime);
+		esLooped=Sieve(num,smallestPrime);
 		if(num!=smallestPrime[num])
 		{
 			int i=smallestPrime[num];
-			System.out.println("SF: " + i + " is a factor");
-			System.out.println("SF: " + num / i + " is another factor");
+			System.out.println("ES: " + i + " is a factor");
+			System.out.println("ES: " + num / i + " is another factor");
 		}
 		else
 		{
-			System.out.println("SF: The number is a prime");
+			System.out.println("ES: The number is a prime");
 		}
-		final long bfEndTime = System.currentTimeMillis();
-		System.out.println("SF: Total execution time: " + (bfEndTime - bfStartTime) + "ms");
-		System.out.println("SF: steps involved: " + bfLooped);
+		final long esEndTime = System.currentTimeMillis();
+		System.out.println("ES: Total execution time: " + (esEndTime - esStartTime) + "ms");
+		System.out.println("ES: steps involved: " + esLooped);
 	}
 	
 	
@@ -311,7 +312,7 @@ public class Main {
         fermatsFactorizationMethod(n);
         bruteForceMethod(n);
         pollardsRhoMethod(n);
-		sieveMethod(n);
+	sieveMethod(n);
         System.out.println("BigInteger start");
         int bfLooped = 0;
         BigInteger bn = new BigInteger(Integer.toString(n));
