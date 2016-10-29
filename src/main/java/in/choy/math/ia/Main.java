@@ -255,12 +255,63 @@ public class Main {
         System.out.println("PF: Total execution time: " + (pfEndTime - pfStartTime) + "ms");
     }
 
+	public static void sieveMethod(int num) {				
+		
+		
+		/*	This method uses the sieve of eratosthenes with 
+		 *  a little trick i learned from here :-
+		 *  http://codeforces.com/blog/entry/7262 
+		 *  The limitation for this method is that the biggest
+		 * 	integer can only be the size of 10^7
+		 * 	i.e. the maximum allocatable size to an array/list   */
+		
+		final long bfStartTime = System.currentTimeMillis();
+		int []sp=new int[num];
+		bfLooped=Sieve(num,sp);
+		if(num!=sp[num])
+		{
+			int i=sp[num];
+			System.out.println("SF: " + i + " is a factor");
+			System.out.println("SF: " + num / i + " is another factor");
+		}
+		else
+		{
+			System.out.println("SF: The number is a prime");
+		}
+		final long bfEndTime = System.currentTimeMillis();
+		System.out.println("SF: Total execution time: " + (bfEndTime - bfStartTime) + "ms");
+		System.out.println("SF: steps involved: " + bfLooped);
+	}
+	
+	
+	public static int Sieve(int max,int sp[]) {
+		int steps=0;
+		boolean v[]=new boolean[max];
+		for (int e = 2; e < max; e += 2)	sp[e] = 2;	//even numbers have smallest prime factor 2
+		
+		for (int i = 3; i < max; i += 2) {
+		
+			if (!v[i]) {
+				sp[i] = i;
+				for (int j = i; (j*i) < max; j += 2) {
+					if (!v[j*i]) {
+						v[j*i] = true;
+						sp[j*i] = i;					//update smallest prime factor of number j*i as i
+					}
+				}
+				steps++;
+			}
+		}
+		return steps;
+	}
+
+
     public static void main(String[] args) {
         n = inputSemiPrime();
         fermatsFactorizationMethod(n);
         bruteForceMethod(n);
         pollardsRhoMethod(n);
-
+		sieveMethod(n);
         System.out.println("BigInteger start");
         int bfLooped = 0;
         BigInteger bn = new BigInteger(Integer.toString(n));
