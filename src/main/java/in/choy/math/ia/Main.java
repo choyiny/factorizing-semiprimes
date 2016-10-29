@@ -12,6 +12,7 @@ public class Main {
     static int ffLooped = 0;
     static int bfLooped = 0;
     static int pfLooped = 0;
+    static int esLooped = 0;
     static BigInteger two=new BigInteger("2");
     static BigInteger four=new BigInteger("4");
 
@@ -255,12 +256,63 @@ public class Main {
         System.out.println("PF: Total execution time: " + (pfEndTime - pfStartTime) + "ms");
     }
 
+	public static void sieveMethod(int num) {				
+		
+		
+		/*	This method uses the sieve of eratosthenes with 
+		 *  a little trick i learned from here :-
+		 *  http://codeforces.com/blog/entry/7262 
+		 *  The limitation for this method is that the biggest
+		 * 	integer can only be the size of 10^7
+		 * 	i.e. the maximum allocatable size to an array/list   */
+		
+		final long esStartTime = System.currentTimeMillis();
+		int []smallestPrime=new int[num];
+		esLooped=Sieve(num,smallestPrime);
+		if(num!=smallestPrime[num])
+		{
+			int i=smallestPrime[num];
+			System.out.println("ES: " + i + " is a factor");
+			System.out.println("ES: " + num / i + " is another factor");
+		}
+		else
+		{
+			System.out.println("ES: The number is a prime");
+		}
+		final long esEndTime = System.currentTimeMillis();
+		System.out.println("ES: Total execution time: " + (esEndTime - esStartTime) + "ms");
+		System.out.println("ES: steps involved: " + esLooped);
+	}
+	
+	
+	public static int Sieve(int max,int smallestPrime[]) {
+		int steps=0;
+		boolean visited[]=new boolean[max];
+		for (int even = 2; even < max; even += 2)	smallestPrime[even] = 2;	//even numbers have smallest prime factor 2
+		
+		for (int i = 3; i < max; i += 2) {
+		
+			if (!visited[i]) {
+				smallesPrime[i] = i;
+				for (int j = i; (j*i) < max; j += 2) {
+					if (!visited[j*i]) {
+						visited[j*i] = true;
+						smallestPrime[j*i] = i;		//update smallest prime factor of number j*i as i
+					}
+				}
+				steps++;
+			}
+		}
+		return steps;
+	}
+
+
     public static void main(String[] args) {
         n = inputSemiPrime();
         fermatsFactorizationMethod(n);
         bruteForceMethod(n);
         pollardsRhoMethod(n);
-
+	sieveMethod(n);
         System.out.println("BigInteger start");
         int bfLooped = 0;
         BigInteger bn = new BigInteger(Integer.toString(n));
